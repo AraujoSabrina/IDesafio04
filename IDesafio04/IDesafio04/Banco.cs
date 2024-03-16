@@ -1,56 +1,77 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace IDesafio04
 {
-    public class Banco
-    {
-        List<Usuario> usario = new List<Usuario>();
-        public void adicionarUsuario(Usuario user)
+  
+        public class Banco
         {
-            usario.Add(user);
-        }
+            List<Usuario> Usuario = new List<Usuario>();
+
+
+        
+
+        public void adicionarUsuario(Usuario puser)
+            {
+
+                Usuario.Add(puser);    
+            }
        
 
-        public double depositar(int id, int deposito)
-        {
-           for (int i = 0; i < usario.Count; i++)
+
+
+        public double depositar(int id, double deposito)
             {
-                if (id == usario[i].getId())
-                this.Valor += deposito;
-
-
-            }
-
-            return Valor;
-        }
-        public double Valor { get; private set; } = 200;
-        public double getConta(int id)
-        {
-            for (int i = 0; i < usario.Count; i++)
+            for (int i = 0; i < Usuario.Count; i++)
             {
-                if (id == usario[i].getId())
-                    return this.Valor;
+
+                if (id == Usuario[i].getId())
+                {
+
+                    this.Usuario[i].saldo += deposito;
+                    return Usuario[i].saldo;
+
+                }
             }
             return 0;
-        }
-        public double sacar(int id, int saque)
-        {
-            for (int i = 0; i < usario.Count; i++)
-            {
-                if (id == usario[i].getId())
-                    this.Valor -= saque;
-                    return this.Valor;
-
+                
             }
-            return 0;
+            public double getConta(int id)
+            {
+                for (int i = 0; i < Usuario.Count; i++)
+                {
+                    if (id == Usuario[i].getId())
+                        return Usuario[i].saldo;
+                }
+                return 0;
+            }
+            public double sacar(int id, double saque)
+            {
+                for (int i = 0; i < Usuario.Count; i++)
+                {
+                if (id == Usuario[i].getId())
+                {
+                    if (saque <= Usuario[i].saldo)
+                    {
+                        this.Usuario[i].saldo -= saque;
+                        return this.Usuario[i].saldo;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pobre");
+                    }
+                    
+                    
+                }
+
+                }
+                return 0;
+            }
+
         }
 
-    }
-
+    
 }
